@@ -8,6 +8,13 @@
 <meta property="og:title" content="al-Sirr al-Jalīl — The Well-Guarded Jewels">
 <meta property="og:description" content="Every square verified. Every count proven. The sword stays in the scabbard.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://sirraljlil.com/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="al-Sirr al-Jalīl — The Well-Guarded Jewels">
+<meta name="twitter:description" content="A verified digital edition of al-Sirr al-Jalīl: every wafq rebuilt and balanced, a live planetary-hours clock keyed to your own horizon, a wird counter, and a printable talismanic plate.">
+<meta name="keywords" content="al-Sirr al-Jalil, Imam Shadhili, abjad calculator, awfaq, magic squares, planetary hours, wird counter, Islamic numerology, Hasbunallahu wa nimal wakil">
+<link rel="canonical" href="https://sirraljlil.com/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"al-Sirr al-Jalīl — The Well-Guarded Jewels","url":"https://sirraljlil.com/","description":"A verified digital edition of al-Sirr al-Jalīl attributed to Imām Abū al-Ḥasan al-Shādhilī, with a location-aware planetary hours clock, verified awfaq, a wird counter, and a printable talismanic plate.","inLanguage":["en","ar"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&family=Spectral:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -303,6 +310,14 @@ nav.top a.give{margin-left:8px}
   </div>
   <div class="hourgrid" id="hr-grid" style="margin-top:18px"></div>
   <div class="planetgrid" id="hr-planets"></div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:14px">
+  <button type="button" id="hr-geo-btn" class="cta sage" style="cursor:pointer">📍 Use my location</button>
+  <span id="hr-geo-status" class="mono" style="font-size:11.5px;color:var(--dim)">Location not set — using the sunrise/sunset above, or click to auto-detect (never sent anywhere).</span>
+</div>
+<div class="hourbanner" id="hr-countdown" style="margin-top:10px"></div>
+<div class="hourbanner" id="hr-moon" style="margin-top:10px"></div>
+<div class="sec-sub" style="margin-top:22px">the next seven days, from the same horizon</div>
+<div class="hourgrid" id="hr-forecast" style="margin-top:10px"></div>
   <p class="lede" style="margin-top:18px;font-size:13.5px">Enter your local sunrise and sunset once — they persist on your
   device. Each square order in the Forge above belongs to a planet (Saturn 3 through Moon 9); writing in the matching
   hour, on the matching day, is the classical timing. The verse itself needs none of this — «you do not need any
@@ -933,10 +948,105 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
   if(chip&&cur){chip.textContent=`${cp.glyph} hour of ${cur.planet} · to ${fmtT(cur.end)}`;
    chip.style.color=cp.hue;chip.style.borderColor=cp.hue+"66";}
  }
- function save(){store.set("sirr-horizon",{sunrise:$("#hr-sunrise").value,sunset:$("#hr-sunset").value});render();}
+ function save(){store.set("sirr-horizon",{sunrise:$("#hr-sunrise").value,sunset:$("#hr-sunset").value});render();renderForecast();}
  $("#hr-sunrise").addEventListener("input",save);
  $("#hr-sunset").addEventListener("input",save);
  render();setInterval(render,30000);
+
+/* ---- geolocation-based horizon (all computed on-device, nothing ever transmitted) ---- */
+function pad2(n){return String(n).padStart(2,"0");}
+function fmtHM(d){return pad2(d.getHours())+":"+pad2(d.getMinutes());}
+function julianDay(d){return d.getTime()/86400000+2440587.5;}
+function sunTimes(lat,lon,date){
+ const rad=Math.PI/180;
+ const jd=Math.floor(julianDay(date));
+ const Jstar=jd-2451545.0+0.0009-(lon/360);
+ const M=(357.5291+0.98560028*Jstar)%360;
+ const Mrad=M*rad;
+ const C=1.9148*Math.sin(Mrad)+0.0200*Math.sin(2*Mrad)+0.0003*Math.sin(3*Mrad);
+ const lambda=(M+C+180+102.9372)%360;
+ const lambdaRad=lambda*rad;
+ const Jtransit=2451545.0+Jstar+0.0053*Math.sin(Mrad)-0.0069*Math.sin(2*lambdaRad);
+ const sinDelta=Math.sin(lambdaRad)*Math.sin(23.44*rad);
+ const delta=Math.asin(sinDelta);
+ const latRad=lat*rad;
+ const cosOmega=(Math.sin(-0.83*rad)-Math.sin(latRad)*Math.sin(delta))/(Math.cos(latRad)*Math.cos(delta));
+ if(cosOmega>1||cosOmega<-1) return {sunrise:null,sunset:null};
+ const omega=Math.acos(cosOmega)/rad;
+ const Jset=Jtransit+omega/360;
+ const Jrise=Jtransit-omega/360;
+ const toDate=function(jday){return new Date((jday-2440587.5)*86400000);};
+ return {sunrise:toDate(Jrise),sunset:toDate(Jset)};
+}
+function moonInfo(now){
+ const synodic=29.53058867;
+ const ref=new Date(Date.UTC(2000,0,6,18,14,0));
+ const days=(now-ref)/86400000;
+ const phase=days/synodic-Math.floor(days/synodic);
+ const illum=Math.round((1-Math.cos(phase*2*Math.PI))/2*100);
+ const names=["New Moon","Waxing Crescent","First Quarter","Waxing Gibbous","Full Moon","Waning Gibbous","Last Quarter","Waning Crescent"];
+ const glyphs=["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘"];
+ const idx2=Math.floor(phase*8)%8;
+ const manzil=Math.floor(phase*28)%28+1;
+ return {phaseName:names[idx2],glyph:glyphs[idx2],illum:illum,manzil:manzil};
+}
+function applyGeoTimes(lat,lon,silent){
+ const t=sunTimes(lat,lon,new Date());
+ if(t.sunrise&&t.sunset){
+  $("#hr-sunrise").value=fmtHM(t.sunrise);
+  $("#hr-sunset").value=fmtHM(t.sunset);
+  store.set("sirr-horizon",{sunrise:$("#hr-sunrise").value,sunset:$("#hr-sunset").value});
+  store.set("sirr-geo",{lat:lat,lon:lon,day:new Date().toDateString()});
+  if($("#hr-geo-status"))$("#hr-geo-status").textContent="Location set · today’s horizon computed automatically ("+lat.toFixed(2)+"°, "+lon.toFixed(2)+"°) — never sent anywhere.";
+  render();renderForecast();
+ }else if(!silent){
+  toast("Could not compute sun times for this location on this date — enter sunrise/sunset manually.");
+ }
+}
+const savedGeo=store.get("sirr-geo");
+if(savedGeo&&savedGeo.lat!=null){
+ if(savedGeo.day!==new Date().toDateString()) applyGeoTimes(savedGeo.lat,savedGeo.lon,true);
+ else if($("#hr-geo-status")) $("#hr-geo-status").textContent="Location set · today’s horizon computed automatically — never sent anywhere.";
+}
+if($("#hr-geo-btn")) $("#hr-geo-btn").addEventListener("click",function(){
+ if(!navigator.geolocation){toast("Geolocation is not supported by this browser.");return;}
+ $("#hr-geo-status").textContent="Detecting your location…";
+ navigator.geolocation.getCurrentPosition(
+  function(pos){applyGeoTimes(pos.coords.latitude,pos.coords.longitude,false);},
+  function(err){$("#hr-geo-status").textContent="Location unavailable — enter sunrise/sunset manually.";},
+  {timeout:10000,maximumAge:3600000}
+ );
+});
+/* ---- live countdown + moon banner ---- */
+function tick(){
+ const now=new Date();
+ const hp=planetaryHours(now,$("#hr-sunrise").value||"05:35",$("#hr-sunset").value||"21:00");
+ const cur=hp.hours.find(function(h){return now>=h.start&&now<h.end;});
+ if(cur&&$("#hr-countdown")){
+  const ms=cur.end-now;
+  const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000);
+  $("#hr-countdown").innerHTML="⏳ "+m+"m "+pad2(s)+"s remaining in this planetary hour";
+ }
+ const moon=moonInfo(now);
+ if($("#hr-moon")) $("#hr-moon").innerHTML=moon.glyph+" "+moon.phaseName+" · lunar mansion "+moon.manzil+" of 28 · "+moon.illum+"% illuminated";
+}
+/* ---- seven-day forecast ---- */
+function renderForecast(){
+ if(!$("#hr-forecast"))return;
+ let out="";
+ for(let d=0;d<7;d++){
+  const day=new Date();day.setDate(day.getDate()+d);day.setHours(12,0,0,0);
+  const hp=planetaryHours(day,$("#hr-sunrise").value||"05:35",$("#hr-sunset").value||"21:00");
+  const p=PLANETS[hp.ruler];
+  out+='<div class="hourcell" style="border-color:'+p.hue+'55">'
+   +'<div style="font-size:11px;color:var(--dim)">'+day.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"})+'</div>'
+   +'<div style="color:'+p.hue+';font-weight:600">'+p.glyph+' '+p.name.split(" · ")[0]+'</div>'
+   +'</div>';
+ }
+ $("#hr-forecast").innerHTML=out;
+}
+tick();setInterval(tick,1000);
+renderForecast();
 })();
  
 /* ═══════════ SUPPORT ═══════════ */
