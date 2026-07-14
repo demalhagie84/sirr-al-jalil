@@ -1226,7 +1226,7 @@ renderSeals();
    const btn=document.createElement("button");
    btn.type="button";btn.className="btn sm printbtn";btn.textContent="🖨 Print this talisman";
    btn.addEventListener("click",function(e){e.preventDefault();printCard(sq);});
-   if(sq.parentElement)sq.parentElement.insertBefore(btn,sq.nextSibling);
+   sq.appendChild(btn);
   });
  }
  let scheduled=false;
