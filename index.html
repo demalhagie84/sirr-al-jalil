@@ -1246,6 +1246,105 @@ renderSeals();
  scheduleAttach();
 })();
 </script>
+<style id="asst-style">
+#asst-fab{position:fixed;right:22px;bottom:22px;z-index:9999;width:54px;height:54px;border-radius:50%;background:var(--bg2);border:1px solid var(--gold);color:var(--gold);font-size:22px;cursor:pointer;box-shadow:0 6px 20px #00000066;transition:.25s}
+#asst-fab:hover{background:var(--gold);color:var(--ink)}
+#asst-panel{position:fixed;right:22px;bottom:86px;z-index:9999;width:min(360px,86vw);max-height:70vh;background:var(--bg2);border:1px solid #e8b84f55;border-radius:6px;box-shadow:0 12px 40px #000000aa;display:flex;flex-direction:column;transform:translateY(12px) scale(.97);opacity:0;pointer-events:none;transition:.22s}
+#asst-panel.open{transform:none;opacity:1;pointer-events:auto}
+.asst-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #ffffff14;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--gold)}
+#asst-close{background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer}
+#asst-input{margin:12px 14px;padding:9px 11px;background:#00000055;border:1px solid #ffffff22;border-radius:4px;color:var(--cream);font-family:var(--body);font-size:14px}
+#asst-input:focus{outline:none;border-color:var(--gold)}
+#asst-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+.asst-chip{background:transparent;border:1px solid #ffffff22;color:var(--dim);font-family:var(--mono);font-size:10px;padding:4px 8px;border-radius:20px;cursor:pointer;transition:.2s}
+.asst-chip:hover{border-color:var(--gold);color:var(--gold)}
+#asst-results{overflow-y:auto;padding:0 10px 12px;display:flex;flex-direction:column;gap:6px}
+.asst-result{text-align:left;background:#00000033;border:1px solid #ffffff14;border-radius:4px;padding:9px 11px;cursor:pointer;transition:.2s;color:var(--cream);width:100%}
+.asst-result:hover{border-color:var(--gold);background:#00000055}
+.asst-result b{display:block;font-family:var(--disp);font-size:14.5px;color:var(--gold);margin-bottom:3px;font-weight:600}
+.asst-result span{display:block;font-size:12px;line-height:1.4;color:var(--dim)}
+.asst-empty{padding:10px 4px;font-size:12.5px;color:var(--dim)}
+.asst-glow{animation:asstGlow 1.8s ease}
+@keyframes asstGlow{0%{box-shadow:0 0 0 0 #e8b84f00}15%{box-shadow:0 0 0 6px #e8b84f55}100%{box-shadow:0 0 0 0 #e8b84f00}}
+@media (max-width:520px){#asst-panel{right:10px;left:10px;width:auto;bottom:80px}#asst-fab{right:16px;bottom:16px}}
+</style>
+<script>
+(function(){
+  var KB = [{"t":"Seal of the Verse — 3×3","a":"#atlas","g":["seal","verse","three","3x3","saturn","khatam"],"b":"The treatise's smallest square, built on 146–154 around a center of 150 — rows, columns, and both diagonals meet at 450."},{"t":"Word Square of the Verse — 4×4","a":"#atlas","g":["word","square","four","4x4","verse","cycle"],"b":"The four words of the verse cycled so every row and column carries the whole sentence — the square the treatise returns to most."},{"t":"Square Against Deception — 7×7","a":"#atlas","g":["deception","khadaa","anfal","seven","7x7","protection","trick"],"b":"Built on Sūrat al-Anfāl 62 — carried on paper, the book says, against being deceived by another."},{"t":"Square of Reconciliation — 7×7","a":"#atlas","g":["reconciliation","sulh","rivals","seven","7x7","peace","dispute"],"b":"Written for two in conflict and drunk from deer skin washed in musk and saffron — meant to mend a rift."},{"t":"Ikhlāṣ Shared Wafq — 6×6","a":"#atlas","g":["ikhlas","six","6x6","cotton","bag","fourteen","nights"],"b":"Sūrat al-Ikhlāṣ circulated by value through six rows — the engine behind the treatise's fourteen-night practice."},{"t":"The Great Square — 19×19","a":"#atlas","g":["great","nineteen","19x19","largest","big"],"b":"The treatise's largest construction — nineteen letters cycling through 361 cells, every row and column closing on 450."},{"t":"The Hollow Five — 5×5","a":"#atlas","g":["hollow","five","5x5","center","name","mars"],"b":"A 5×5 of side 65 with the center left open for any divine name — the Forge below fills it live for a value you choose."},{"t":"The Six Small Seals","a":"#atlas","g":["six","seals","leadership","names"],"b":"Six 4×4 squares, one per name — Allāh, Raḥmān, Raḥīm, Qahhār, Jabbār, ʿAzīz — each row equal to the name's own value."},{"t":"The Working Names — Fattāḥ, Kāfī, Ghanī…","a":"#atlas","g":["fattah","kafi","ghani","hadi","khabir","matin","working","names"],"b":"Six more seals, each carrying one name by its abjad value — opening, sufficiency, independence, guidance, awareness, firmness."},{"t":"Dhū'l-Jalāl wa'l-Ikrām — 3×3","a":"#atlas","g":["jalal","ikram","three","3x3","majesty"],"b":"A compact 3×3 said to gather every attribute of praise — used in the treatise for land, catch, and waking for the vigil."},{"t":"The Vocatives of Height — 6×6","a":"#atlas","g":["jah","height","six","6x6","monday","dignity"],"b":"Six exalted vocatives woven through a 6×6 — recited Monday after Fajr for dignity granted through Allah, not over anyone."},{"t":"The Five Names of Provision","a":"#atlas","g":["rizq","sustenance","provision","razzaq","wahhab","fattah","ghani","money"],"b":"Al-Razzāq, al-Wahhāb, al-Fattāḥ, al-Ghanī, al-Muʿṭī — each sent to the Hollow Five by its own value."},{"t":"The Forge — build any square","a":"#forge","g":["forge","build","custom","any","name","number","order","3","20"],"b":"Turn any name, verse, or number into a balanced square from 3×3 up to 20×20, fire orientation first, verified as it fills."},{"t":"Planetary Hours & your horizon","a":"#hours","g":["planetary","hour","sunrise","sunset","location","horizon","clock"],"b":"Twelve unequal hours of day and twelve of night, computed from your own sunrise and sunset — entered once, kept on your device."},{"t":"The Seven Planetary Seals","a":"#hr-seals","g":["seven","seals","planet","order"],"b":"Each planet's own verified square traced as a sealed glyph, from Saturn's 3×3 through the Moon's 9×9."},{"t":"Moon phase & lunar mansion","a":"#hr-moon","g":["moon","phase","lunar","mansion","illumination"],"b":"The current phase and mansion of the moon, computed live from your device's clock and location."},{"t":"The Seven-Day Forecast","a":"#hr-forecast","g":["forecast","week","days","planet","upcoming"],"b":"The ruling planet for each of the next seven days, drawn from the same horizon as the hour clock."},{"t":"The Foundation — 450 daily","a":"#works","g":["foundation","450","daily","works"],"b":"The core daily practice of the treatise: the verse by day and night, sealed with the sixfold fanqalabū and the riḍwān."},{"t":"Morning & Evening — the ten ḥasbiyas","a":"#works","g":["morning","evening","hasbiya","ten"],"b":"A threefold morning and evening litany built around ten repetitions of the ḥasbiya formula."},{"t":"Sustenance — Kāfī, Ghanī, Fattāḥ","a":"#works","g":["rizq","sustenance","kafi","ghani","fattah","money","provision"],"b":"A dedicated work for provision, cycling three names by their abjad values."},{"t":"Ṣalāt al-Fatḥ wa'l-Qurb — Ibn Mashīsh","a":"#works","g":["mashishiyya","salat","fath","qurb","prayer","ibn","mashish"],"b":"The Prayer of Opening and Nearness attributed to Ibn Mashīsh, given here in full."},{"t":"Letters & the Four Elements","a":"#letter-elements","g":["letter","element","fire","air","water","earth","nature","huruf"],"b":"Every Arabic letter carries one of four elements and a paired nature — the same four courses the Forge can turn a square through."},{"t":"The Ādāb — conditions before opening any of this","a":"#adab-list","g":["adab","ethics","conditions","etiquette","purity","before"],"b":"Six conditions the masters set before working with any square: purity, sincerity, patience, and licit intent above all."},{"t":"The Sealed Chamber","a":"#works","g":["sword","sealed","withheld","closed","chamber"],"b":"What this edition deliberately withholds — the sword-work of the original, studied here only as arithmetic, never as operation."},{"t":"The Wird — daily counter","a":"#wird","g":["wird","counter","tally","dhikr","count","milestone"],"b":"A tapable dial for nine of the treatise's counts, ringing at every hundred — your total stays on your device alone."},{"t":"al-Lawḥ al-Jalīl — The Great Plate","a":"#plate","g":["plate","lawh","grand","poster","great"],"b":"Every wafq of the treatise gathered on a single printable plate, ringed by the Ninety-Nine Names, total abjad 36,808."},{"t":"The Grand Wafq of the Ninety-Nine Names","a":"#names-wafq-mount","g":["99","ninety","nine","names","grand","wafq","allah","box"],"b":"One hundred boxes — Allah and each of the Ninety-Nine Names — printable on its own beneath the Great Plate."},{"t":"Printing a talisman","a":"#plate","g":["print","download","svg","poster","paper"],"b":"The Great Plate and the Grand Wafq of the Names each carry their own print button — every other square is for study on screen."},{"t":"Your location stays private","a":"#hours","g":["privacy","location","tracking","private","never","sent"],"b":"Sunrise and sunset are computed on your device the moment you allow location access — nothing is ever transmitted anywhere."},{"t":"Support the work","a":"#support","g":["support","donate","paypal","sadaqa","gift"],"b":"This edition is offered free; a voluntary gift of any size is received with gratitude, no account or tracking required."},{"t":"The Taṣḥīḥāt — five corrected slips","a":"#tashih","g":["errata","correction","mistake","translation","slip","tashih"],"b":"Five places where the English translation drifted from the Arabic original, each resolved here by direct abjad arithmetic."}];
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function norm(s){ return String(s).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,''); }
+  function score(entry, words){
+    var s=0, title=norm(entry.t), blurb=norm(entry.b);
+    for(var k=0;k<words.length;k++){
+      var w=words[k]; if(!w) continue;
+      if(title.indexOf(w)!==-1) s+=3;
+      for(var j=0;j<entry.g.length;j++){ var g=entry.g[j]; if(g===w) s+=2.5; else if(g.indexOf(w)===0||w.indexOf(g)===0) s+=1.2; }
+      if(blurb.indexOf(w)!==-1) s+=0.6;
+    }
+    return s;
+  }
+  function search(q){
+    var words = norm(q).split(/\s+/).filter(Boolean);
+    if(!words.length) return [];
+    var scored = KB.map(function(e){ return {e:e,s:score(e,words)}; }).filter(function(x){return x.s>0;});
+    scored.sort(function(a,b){return b.s-a.s;});
+    return scored.slice(0,6).map(function(x){return x.e;});
+  }
+  var fab = document.createElement('button');
+  fab.id='asst-fab'; fab.setAttribute('aria-label','Search the treatise'); fab.innerHTML='&#8981;';
+  var panel = document.createElement('div'); panel.id='asst-panel';
+  panel.innerHTML = '<div class="asst-head"><span>SEARCH THE TREATISE</span><button id="asst-close" aria-label="Close">&times;</button></div>'+
+    '<input id="asst-input" type="text" placeholder="a square, a name, an hour, print, adab…" autocomplete="off">'+
+    '<div id="asst-chips"></div><div id="asst-results"></div>';
+  document.body.appendChild(fab);
+  document.body.appendChild(panel);
+  var chipsWrap = panel.querySelector('#asst-chips');
+  var CHIPS = ['Seven Seals','Grand Wafq of Names','Sunrise & Sunset','Print a Talisman','Adab','Great Plate','Custom Square'];
+  CHIPS.forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.className='asst-chip'; b.textContent=c;
+    b.addEventListener('click', function(){ input.value=c; runSearch(); input.focus(); });
+    chipsWrap.appendChild(b);
+  });
+  var input = panel.querySelector('#asst-input');
+  var results = panel.querySelector('#asst-results');
+  function render(list, q){
+    results.innerHTML='';
+    if(!q) return;
+    if(!list.length){ results.innerHTML = '<p class="asst-empty">Nothing matched — try a planet, a name, or a section like wird or plate.</p>'; return; }
+    list.forEach(function(e){
+      var card = document.createElement('button');
+      card.type='button'; card.className='asst-result';
+      card.innerHTML = '<b>'+esc(e.t)+'</b><span>'+esc(e.b)+'</span>';
+      card.addEventListener('click', function(){ go(e); });
+      results.appendChild(card);
+    });
+  }
+  function go(e){
+    var target = document.querySelector(e.a);
+    panel.classList.remove('open');
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      target.classList.add('asst-glow');
+      setTimeout(function(){ target.classList.remove('asst-glow'); }, 1800);
+    }
+  }
+  function runSearch(){ render(search(input.value), input.value.trim()); }
+  input.addEventListener('input', runSearch);
+  input.addEventListener('keydown', function(ev){ if(ev.key==='Enter'){ var list=search(input.value); if(list[0]) go(list[0]); } });
+  fab.addEventListener('click', function(){ panel.classList.toggle('open'); if(panel.classList.contains('open')) setTimeout(function(){ input.focus(); },50); });
+  panel.querySelector('#asst-close').addEventListener('click', function(){ panel.classList.remove('open'); });
+  document.addEventListener('keydown', function(ev){
+    if(ev.key==='Escape'){ panel.classList.remove('open'); return; }
+    if(ev.key==='/'){
+      var ae=document.activeElement, tag=ae&&ae.tagName;
+      if(tag==='INPUT'||tag==='TEXTAREA'||(ae&&ae.isContentEditable)) return;
+      ev.preventDefault();
+      panel.classList.add('open');
+      setTimeout(function(){ input.focus(); },50);
+    }
+  });
+})();
+</script>
 </body>
 </html>
  
