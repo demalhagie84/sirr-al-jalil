@@ -366,6 +366,14 @@ nav.top a.give{margin-left:8px}
   <h2 class="sec-title">The Works</h2>
   <div class="sec-sub">the licit program of the treatise — full Arabic, verified counts, sources cited in both editions</div>
   <div id="works-list" style="max-width:940px"></div>
+<div style="margin-top:34px">
+<div class="eyebrow">علم الحروف</div>
+<h3 style="font-family:var(--disp);font-size:22px;color:var(--bright);margin-bottom:6px">The Science of Letters — element, nature, adab</h3>
+<p class="lede" style="margin-bottom:16px">A strand the wider tradition of ʿilm al-ḥurūf shares with this treatise, carried also in Shams al-Maʿārif and kindred works: each letter carries one of the four elements and a paired nature — the same four courses the Forge above lets you turn a square through. Kept here for study, not for show.</p>
+<div class="grid g2" id="letter-elements" style="max-width:900px;margin-bottom:20px"></div>
+<div class="eyebrow" style="color:var(--sage)">الآداب — conditions the masters set before opening any of this</div>
+<div id="adab-list" style="max-width:820px"></div>
+</div>
   <div class="sealed" style="margin-top:6px">
     <div class="t">The Sealed Chamber — what this edition leaves closed, deliberately</div>
     <p>Roughly a third of the original is sword-work: the seven ways against oppressors, destruction, division,
@@ -418,10 +426,10 @@ nav.top a.give{margin-left:8px}
     <button class="btn" id="plate-dl">Download SVG — print at A2 or larger</button>
     <button class="btn" onclick="window.print()">Print this plate</button>
   </div>
-  <p class="lede">Fifteen constructions, all balanced live: the Seal of the Verse, the word square of the verse,
+  <p class="lede">Thirteen constructions, all balanced live: the Seal of the Verse, the word square of the verse,
   the Ikhlāṣ shared wafq, the Great 19×19, the six small seals, the six working names, both 7×7 word squares,
-  the hollow five, Dhū’l-Jalāl, the vocatives of height, and now the seven planetary seals ringing the lower field, traced live from each verified square. Handwritten beats printed — the book asks musk,
-  rose water, and saffron of the one who copies it by hand. Below the plate, the Grand Wafq of the Ninety-Nine Names and their Owner — one hundred boxes, printable on its own.</p>
+  the hollow five, Dhū’l-Jalāl, the vocatives of height, Handwritten beats printed — the book asks musk,
+  rose water, and saffron of the one who copies it by hand. Below the plate, the Grand Wafq of the Ninety-Nine Names and their Owner — one hundred boxes, printable on its own; the seven planetary seals now have their own home above, in the Hours section.</p>
   <div class="plate-frame"><div id="plate-mount"></div></div>
 <div class="sec-sub" style="margin-top:26px">the Grand Wafq of the Names — the Ninety-Nine and their Owner, one hundred boxes</div>
 <div id="names-wafq-mount" style="margin-top:12px;overflow-x:auto"></div>
@@ -886,6 +894,28 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
  document.addEventListener("click",e=>{const h=e.target.closest("[data-toggle]");if(!h)return;
   const el=$("#wk-"+h.dataset.toggle);el.classList.toggle("open");});
 })();
+
+/* ═══════════ SCIENCE OF LETTERS + ADAB ═══════════ */
+(function(){
+const LETTER_ELEMENTS=[
+{el:"fire",ar:"نار",hue:"var(--ember)",letters:["ا","ه","ط","م","ف","ش","ذ"]},
+{el:"air",ar:"هواء",hue:"var(--gold)",letters:["ب","و","ي","ن","ص","ت","ظ"]},
+{el:"water",ar:"ماء",hue:"var(--sage)",letters:["ج","ز","ك","س","ق","ث","غ"]},
+{el:"earth",ar:"تراب",hue:"var(--brass)",letters:["د","ح","ل","ع","ر","خ","ض"]}];
+const ADAB_POINTS=[
+"Ritual purity and a settled heart before beginning — the letters are opened, not seized.",
+"Ask of Allah alone through His names; the square is a means, never a mover in itself.",
+"Keep the count given, in the hour given, without doubting partway through.",
+"Seek only licit benefit and the warding of harm — never to injure, coerce, or part two people wrongfully.",
+"Patience while a wafq is carried; its fruit is timed by Allah, not by the one who wears it.",
+"Whatever unveils itself along the way belongs to Allah — give thanks, and continue without vanity."];
+const host=$("#letter-elements");
+if(host)host.innerHTML=LETTER_ELEMENTS.map(function(g){
+return '<div class="card" style="text-align:center"><div class="t" style="color:'+g.hue+'">'+g.ar+'</div><div class="s">'+g.el+'</div><div class="ar" style="font-size:22px;letter-spacing:4px;margin-top:8px">'+g.letters.join(" ")+'</div></div>';
+}).join("");
+const al=$("#adab-list");
+if(al)al.innerHTML=ADAB_POINTS.map(function(p,i){return '<div style="display:flex;gap:10px;margin-bottom:8px;font-size:13.5px;color:var(--dim)"><span class="mono" style="color:var(--sage)">'+(i+1)+'.</span><span>'+esc(p)+'</span></div>';}).join("");
+})();
  
 /* ═══════════ WIRD ═══════════ */
 (function(){
@@ -930,18 +960,8 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
 /* ═══════════ THE GREAT PLATE ═══════════ */
 (function(){
  const INK="#2a1f14",MADDER="#8c2f1b",GOLD="#8a6a24",PARCH="#f2e7cd";
- const W=1560,H=2760;
-function sealGroup(order,hue,cx,cy,size){
- const cell=size/baseSquare(order).length;
- const c=sealCoords(order,cell);
- const pts=c.pts;
- const off0=cx-size/2,off1=cy-size/2;
- let ptsAttr=pts.map(function(p){return (off0+p[0])+","+(off1+p[1]);}).join(" ");
- let dots="";
- for(let i=0;i<pts.length;i++){const p=pts[i];const isEnd=(i===0||i===pts.length-1);dots+='<circle cx="'+(off0+p[0])+'" cy="'+(off1+p[1])+'" r="'+(isEnd?3.5:1.5)+'" fill="'+hue+'"/>';}
- return '<rect x="'+(cx-size/2-6)+'" y="'+(cy-size/2-6)+'" width="'+(size+12)+'" height="'+(size+12)+'" fill="none" stroke="'+INK+'" stroke-width="1"/><polyline points="'+ptsAttr+'" fill="none" stroke="'+hue+'" stroke-width="2" stroke-linejoin="round"/>'+dots;
-}
- function sq(grid,x,y,cell,opts={}){
+ const W=1560,H=2480;
+function sq(grid,x,y,cell,opts={}){
   const{text=false,hollow=false,fs=0}=opts;const n=grid.length,ctr=Math.floor(n/2);let s="";
   s+=`<rect x="${x-3}" y="${y-3}" width="${n*cell+6}" height="${n*cell+6}" fill="none" stroke="${INK}" stroke-width="2.2"/>`;
   for(let r=0;r<n;r++)for(let c=0;c<n;c++){
@@ -962,7 +982,7 @@ function sealGroup(order,hue,cx,cy,size){
    else if((t-=L1)<L2){x=rgt.x;y=rgt.y0+t;rot=90;}
    else if((t-=L2)<L3){x=bot.x0+t;y=bot.y;rot=180;}
    else{t-=L3;x=lft.x;y=lft.y1-t;rot=270;}
-   s+=`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-size="17" fill="${INK}" font-family="Amiri, serif" transform="rotate(${rot},${x},${y})">${NINETY_NINE[i]}</text>`;
+   s+=`<text x="${x}" y="${y+6}" text-anchor="middle" font-size="17" fill="${INK}" font-family="Amiri, serif" transform="rotate(${rot},${x},${y})">${NINETY_NINE[i]}</text>`;
    d+=step;}
   return s;}
  function buildPlate(){
@@ -997,18 +1017,8 @@ function sealGroup(order,hue,cx,cy,size){
   <text x="${W/2}" y="2132" text-anchor="middle" font-size="17" fill="${INK}">للقطب الغوث سيدي أبي الحسن الشاذلي رضي الله عنه</text>
   ${ded?`<text x="${W/2}" y="2172" text-anchor="middle" font-size="18" fill="${GOLD}">${esc(ded)}</text>`:""}
   <text x="${W/2}" y="2260" text-anchor="middle" font-size="15" fill="${GOLD}">سلام قولا من رب رحيم · قل هو الرحمن آمنا به وعليه توكلنا</text>
-  <text x="${W/2}" y="2310" text-anchor="middle" font-size="14" fill="${INK}" opacity="0.7">مجموع الأسماء الحسنى التسعة والتسعين بالجُمَّل ٣٦٨٠٨ · كل وفق متحقق الميزان</text>${(function(){
- const segW=(W-220)/7;
- let out=`<text x="${W/2}" y="2380" text-anchor="middle" font-size="21" fill="${GOLD}">الأختام السبعة — the Seven Seals, traced from each verified square</text>`;
- out+=CHALDEAN.map(function(k,i){
-  const p=PLANETS[k];
-  const cx=110+segW*i+segW/2,cy=2560,size=130;
-  const arName=p.name.split(" · ")[1]||p.name;
-  return sealGroup(p.order,p.hue,cx,cy,size)+`<text x="${cx}" y="${cy+size/2+30}" text-anchor="middle" font-size="15" fill="${INK}">${p.glyph} ${arName}</text>`;
- }).join("");
- return out;
-})()}
-  </svg>`;
+  <text x="${W/2}" y="2310" text-anchor="middle" font-size="14" fill="${INK}" opacity="0.7">مجموع الأسماء الحسنى التسعة والتسعين بالجُمَّل ٣٦٨٠٨ · كل وفق متحقق الميزان</text>
+</svg>`;
   $("#plate-mount").innerHTML=s;}
  $("#plate-dedication").addEventListener("input",buildPlate);
  $("#plate-dl").addEventListener("click",()=>{
@@ -1220,7 +1230,7 @@ renderSeals();
   setTimeout(function(){w.focus();w.print();},350);
  }
  function attachPrintButtons(){
-  document.querySelectorAll(".sq, .sealcard, .namewafq").forEach(function(sq){
+  document.querySelectorAll(".namewafq").forEach(function(sq){
    if(sq.getAttribute("data-printable"))return;
    sq.setAttribute("data-printable","1");
    const btn=document.createElement("button");
