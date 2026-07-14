@@ -198,6 +198,38 @@ nav.top a.give{margin-left:8px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 @media print{nav.top,.hero,#maqam,#atlas,#forge,#works,#wird,#support,footer,.plate-controls{display:none}
   body{background:#fff}.plate-frame{border:none;background:#fff;padding:0}#lawh{max-width:100%}}
+
+/* ---- overflow safety for large wafqs ---- */
+.sq{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.printbtn{margin-top:8px;font-size:11px;padding:5px 10px;cursor:pointer}
+/* ---- seven seals ---- */
+.sealcard{display:inline-block;padding:14px;background:#00000066;border:2px solid #c9a35c88;border-radius:3px;
+ box-shadow:0 0 34px #c9a35c22, inset 0 0 24px #00000088;text-align:center;max-width:100%}
+.sealcard svg{display:block;margin:0 auto}
+/* ---- names grand wafq ---- */
+.namewafq{display:inline-grid;gap:2px;background:#00000066;border:2px solid #c9a35c88;border-radius:3px;
+ box-shadow:0 0 34px #c9a35c22, inset 0 0 24px #00000088;padding:6px;direction:rtl;max-width:100%}
+.namewafq .nc{display:flex;align-items:center;justify-content:center;border:1px solid #c9a35c33;
+ font-family:var(--ar);color:var(--cream);text-align:center;line-height:1.1;padding:2px;overflow:hidden}
+/* ---- hero: live ribbon ---- */
+.hero-ribbon{display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
+ margin:0 auto 22px;padding:8px 18px;border:1px solid #c9a35c55;border-radius:30px;background:#0000004d;
+ font-size:12.5px;color:var(--gold);letter-spacing:.03em}
+.hero-ribbon b{color:var(--cream)}
+/* ---- hero: entrance animation ---- */
+@keyframes heroRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero-anim{opacity:0;animation:heroRise .9s ease forwards}
+/* ---- hero: ambient glow ---- */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-30%;left:50%;width:900px;height:900px;margin-left:-450px;
+ background:radial-gradient(circle,#c9a35c14,transparent 60%);animation:heroGlow 10s ease-in-out infinite;
+ pointer-events:none;z-index:0}
+@keyframes heroGlow{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+.hero .container{position:relative;z-index:1}
+/* ---- hero: scroll cue ---- */
+.scrollcue{display:block;margin:38px auto 0;text-align:center;color:var(--faint);font-size:11.5px;
+ letter-spacing:.15em;text-transform:uppercase;animation:cueBounce 2.2s ease-in-out infinite}
+@keyframes cueBounce{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(6px);opacity:1}}
 </style>
 </head>
 <body>
@@ -215,15 +247,17 @@ nav.top a.give{margin-left:8px}
 </div></nav>
  
 <header class="hero" id="top"><div class="container">
-  <div class="bismillah">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ · ٧٨٦</div>
-  <div class="verse" id="hero-verse" title="hover each word — the letters prove the number"></div>
-  <div class="tr">“Allah suffices us, and what an excellent Guardian He is.” — Āl ʿImrān 173</div>
-  <div class="stats"><b>19</b> letters · <b>450</b> by the reckoning · <b>450</b> = عليم <b>150</b> + سلطان <b>150</b> + سيف <b>150</b></div>
-  <div>
+  <div class="hero-ribbon hero-anim" style="animation-delay:.05s" id="hero-ribbon"><span id="ribbon-hour">✳ the hour is turning…</span><span style="opacity:.4">·</span><span id="ribbon-moon"></span></div>
+  <div class="bismillah hero-anim" style="animation-delay:.15s">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ · ٧٨٦</div>
+  <div class="verse hero-anim" style="animation-delay:.25s" id="hero-verse" title="hover each word — the letters prove the number"></div>
+  <div class="tr hero-anim" style="animation-delay:.35s">“Allah suffices us, and what an excellent Guardian He is.” — Āl ʿImrān 173</div>
+  <div class="stats hero-anim" style="animation-delay:.45s"><b class="cnt" data-target="19">0</b> letters · <b class="cnt" data-target="450">0</b> by the reckoning · <b class="cnt" data-target="450">0</b> = عليم <b class="cnt" data-target="150">0</b> + سلطان <b class="cnt" data-target="150">0</b> + سيف <b class="cnt" data-target="150">0</b></div>
+  <div class="hero-anim" style="animation-delay:.55s">
     <a class="cta sage" href="#wird">Begin the Wird</a>
     <a class="cta" href="#atlas">Enter the Atlas</a>
     <a class="cta ember" href="#plate">The Great Plate</a>
   </div>
+  <div class="scrollcue hero-anim" style="animation-delay:.9s">⌄ descend into the treatise ⌄</div>
   <p class="lede" style="margin:34px auto 0;text-align:center">
     A verified digital edition of <i>al-Sirr al-Jalīl fī khawāṣṣ Ḥasbunallāhu wa-niʿma al-wakīl</i> —
     “the Well-Guarded Jewels and the Hidden Pearls” — attributed to the Quṭb al-Ghawth
@@ -276,7 +310,7 @@ nav.top a.give{margin-left:8px}
     <button class="btn ember" id="m-number">Direct number</button>
     <button class="btn ember" id="m-letters">Letters in the boxes</button>
     <span style="width:14px"></span>
-    <button class="btn ember on" id="e-classic">Classic wafq · 3–9</button>
+    <button class="btn ember on" id="e-classic">Classic wafq · 3–20</button>
     <button class="btn ember" id="e-hollow">الخمس خالي الوسط</button>
   </div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
@@ -318,6 +352,8 @@ nav.top a.give{margin-left:8px}
 <div class="hourbanner" id="hr-moon" style="margin-top:10px"></div>
 <div class="sec-sub" style="margin-top:22px">the next seven days, from the same horizon</div>
 <div class="hourgrid" id="hr-forecast" style="margin-top:10px"></div>
+<div class="sec-sub" style="margin-top:22px">the seven seals — traced from each planet’s own verified square, in numerical order 1 → n²</div>
+<div id="hr-seals" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px"></div>
   <p class="lede" style="margin-top:18px;font-size:13.5px">Enter your local sunrise and sunset once — they persist on your
   device. Each square order in the Forge above belongs to a planet (Saturn 3 through Moon 9); writing in the matching
   hour, on the matching day, is the classical timing. The verse itself needs none of this — «you do not need any
@@ -382,11 +418,13 @@ nav.top a.give{margin-left:8px}
     <button class="btn" id="plate-dl">Download SVG — print at A2 or larger</button>
     <button class="btn" onclick="window.print()">Print this plate</button>
   </div>
-  <p class="lede">Thirteen constructions, all balanced live: the Seal of the Verse, the word square of the verse,
+  <p class="lede">Fifteen constructions, all balanced live: the Seal of the Verse, the word square of the verse,
   the Ikhlāṣ shared wafq, the Great 19×19, the six small seals, the six working names, both 7×7 word squares,
-  the hollow five, Dhū'l-Jalāl, and the vocatives of height. Handwritten beats printed — the book asks musk,
-  rose water, and saffron of the one who copies it by hand.</p>
+  the hollow five, Dhū’l-Jalāl, the vocatives of height, and now the seven planetary seals ringing the lower field, traced live from each verified square. Handwritten beats printed — the book asks musk,
+  rose water, and saffron of the one who copies it by hand. Below the plate, the Grand Wafq of the Ninety-Nine Names and their Owner — one hundred boxes, printable on its own.</p>
   <div class="plate-frame"><div id="plate-mount"></div></div>
+<div class="sec-sub" style="margin-top:26px">the Grand Wafq of the Names — the Ninety-Nine and their Owner, one hundred boxes</div>
+<div id="names-wafq-mount" style="margin-top:12px;overflow-x:auto"></div>
 </div></section>
  
 <section id="support"><div class="container">
@@ -435,7 +473,50 @@ function siamese(n){const g=Array.from({length:n},()=>Array(n).fill(0));let r=0,
 const SQ4=[[1,8,10,15],[12,13,3,6],[7,2,16,9],[14,11,5,4]];
 const SQ6=[[6,32,3,34,35,1],[7,11,27,28,8,30],[19,14,16,15,23,24],[18,20,22,21,17,13],[25,29,10,9,26,12],[36,5,33,4,2,31]];
 const SQ8=[[8,58,59,5,4,62,63,1],[49,15,14,52,53,11,10,56],[41,23,22,44,45,19,18,48],[32,34,35,29,28,38,39,25],[40,26,27,37,36,30,31,33],[17,47,46,20,21,43,42,24],[9,55,54,12,13,51,50,16],[64,2,3,61,60,6,7,57]];
-const baseSquare=n=>n===4?SQ4.map(r=>r.slice()):n===6?SQ6.map(r=>r.slice()):n===8?SQ8.map(r=>r.slice()):siamese(n);
+function evenDoubly(n){
+ const g=[];
+ for(let i=0;i<n;i++){g.push([]);for(let j=0;j<n;j++)g[i].push(i*n+j+1);}
+ for(let i=0;i<n;i++)for(let j=0;j<n;j++){
+  const a=(i%4===0||i%4===3),b=(j%4===0||j%4===3);
+  if(a===b){g[i][j]=n*n+1-g[i][j];}
+ }
+ return g;
+}
+function evenSingly(n){
+ const m=n/2,k=(m-1)/2;
+ const S=siamese(m);
+ const mk=function(off){return S.map(function(r){return r.map(function(v){return v+off*m*m;});});};
+ const A=mk(0),B=mk(2),C=mk(3),D=mk(1);
+ const g=Array.from({length:n},function(){return Array(n).fill(0);});
+ for(let i=0;i<m;i++)for(let j=0;j<m;j++){
+  g[i][j]=A[i][j]; g[i][j+m]=B[i][j]; g[i+m][j]=C[i][j]; g[i+m][j+m]=D[i][j];
+ }
+ for(let i=0;i<m;i++)for(let j=0;j<k;j++){const t=g[i][j];g[i][j]=g[i+m][j];g[i+m][j]=t;}
+ const mid=(m-1)/2;
+ {
+  const j=k; const t=g[mid][j]; g[mid][j]=g[mid+m][j]; g[mid+m][j]=t;
+  const j0=0; const t2=g[mid][j0]; g[mid][j0]=g[mid+m][j0]; g[mid+m][j0]=t2;
+ }
+ for(let i=0;i<m;i++)for(let jj=0;jj<k-1;jj++){const j=m-1-jj;const t=g[i][j+m];g[i][j+m]=g[i+m][j+m];g[i+m][j+m]=t;}
+ return g;
+}
+function sealCoords(order,cell){
+ const grid=baseSquare(order);
+ const n=grid.length;
+ const pos=new Array(n*n+1);
+ for(let r=0;r<n;r++)for(let c=0;c<n;c++)pos[grid[r][c]]=[c,r];
+ const pts=[];
+ for(let v=1;v<=n*n;v++){const p=pos[v];pts.push([(p[0]+0.5)*cell,(p[1]+0.5)*cell]);}
+ return {pts:pts,size:n*cell};
+}
+const baseSquare=function(n){
+ if(n===4)return SQ4.map(function(r){return r.slice();});
+ if(n===6)return SQ6.map(function(r){return r.slice();});
+ if(n===8)return SQ8.map(function(r){return r.slice();});
+ if(n%2===1)return siamese(n);
+ if(n%4===0)return evenDoubly(n);
+ return evenSingly(n);
+};
 const magicConstant=n=>(n*(n*n+1))/2;
 const REMAINDER_OK=new Set([3,4,5,7,9]);
 function fitReport(A,n){const M=magicConstant(n);
@@ -619,7 +700,7 @@ function toast(msg){const t=$("#toast");t.textContent=msg;t.style.display="block
 /* ═══════════ RENDERERS ═══════════ */
 function numSquareHTML(grid,{big=false,hollow=false,ember=false,reveal=true}={}){
  const n=grid.length,ctr=Math.floor(n/2);
- const cs=big?(n<=4?74:n<=6?58:n<=7?50:42):(n<=4?56:n<=6?46:n<=7?40:34);
+ const cs=big?(n<=4?74:n<=6?58:n<=7?50:n<=9?42:n<=13?36:n<=16?30:26):(n<=4?56:n<=6?46:n<=7?40:n<=9?34:n<=13?28:n<=16?24:20);
  let h=`<div class="sq${ember?" ember":""}">`;
  for(let r=0;r<n;r++){h+='<div class="r">';
   for(let c=0;c<n;c++){const v=grid[r][c];
@@ -752,9 +833,9 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
    return;}
   const res=engine==="hollow5"?hollow5(a):wafq(a,order);
   if(engine==="classic"){
-   $("#f-fits").innerHTML=[3,4,5,6,7,8,9].map(n=>{const f=fitReport(a,n);const p=BY_ORDER[n];
+   $("#f-fits").innerHTML=[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map(n=>{const f=fitReport(a,n);const p=BY_ORDER[n]||{hue:"#c9a35c",glyph:"⟡"};
     return `<div class="fitcell${f.ok?"":" no"}" data-order="${n}" style="${order===n?`border-color:${p.hue};background:${p.hue}22`:`border-color:${p.hue}44`}">
-     <div class="p" style="color:${p.hue}">${p.glyph} ${n}×${n} ${Object.keys(PLANETS).find(k=>PLANETS[k].order===n)}</div>
+     <div class="p" style="color:${p.hue}">${p.glyph} ${n}×${n} ${Object.keys(PLANETS).find(k=>PLANETS[k].order===n)||"extended"}</div>
      <div class="f" style="color:${f.ok?"var(--green)":"#e86a52aa"}">${f.ok?`✓ starts ${f.k}${f.rem?` · lift +${f.rem}`:""}`:`✗ ${f.why}`}</div></div>`;}).join("");
    $("#f-elems").innerHTML=ELEMENTS.map((e,i)=>`<button class="btn ember sm${elem===i?" on":""}" data-elem="${i}">${e.key} · ${e.ar}</button>`).join("")+
     `<button class="btn ember sm${reveal?" on":""}" id="f-reveal">${reveal?"names revealed":"reveal divine names"}</button>`;}
@@ -849,7 +930,17 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
 /* ═══════════ THE GREAT PLATE ═══════════ */
 (function(){
  const INK="#2a1f14",MADDER="#8c2f1b",GOLD="#8a6a24",PARCH="#f2e7cd";
- const W=1560,H=2480;
+ const W=1560,H=2760;
+function sealGroup(order,hue,cx,cy,size){
+ const cell=size/baseSquare(order).length;
+ const c=sealCoords(order,cell);
+ const pts=c.pts;
+ const off0=cx-size/2,off1=cy-size/2;
+ let ptsAttr=pts.map(function(p){return (off0+p[0])+","+(off1+p[1]);}).join(" ");
+ let dots="";
+ for(let i=0;i<pts.length;i++){const p=pts[i];const isEnd=(i===0||i===pts.length-1);dots+='<circle cx="'+(off0+p[0])+'" cy="'+(off1+p[1])+'" r="'+(isEnd?3.5:1.5)+'" fill="'+hue+'"/>';}
+ return '<rect x="'+(cx-size/2-6)+'" y="'+(cy-size/2-6)+'" width="'+(size+12)+'" height="'+(size+12)+'" fill="none" stroke="'+INK+'" stroke-width="1"/><polyline points="'+ptsAttr+'" fill="none" stroke="'+hue+'" stroke-width="2" stroke-linejoin="round"/>'+dots;
+}
  function sq(grid,x,y,cell,opts={}){
   const{text=false,hollow=false,fs=0}=opts;const n=grid.length,ctr=Math.floor(n/2);let s="";
   s+=`<rect x="${x-3}" y="${y-3}" width="${n*cell+6}" height="${n*cell+6}" fill="none" stroke="${INK}" stroke-width="2.2"/>`;
@@ -906,7 +997,17 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
   <text x="${W/2}" y="2132" text-anchor="middle" font-size="17" fill="${INK}">للقطب الغوث سيدي أبي الحسن الشاذلي رضي الله عنه</text>
   ${ded?`<text x="${W/2}" y="2172" text-anchor="middle" font-size="18" fill="${GOLD}">${esc(ded)}</text>`:""}
   <text x="${W/2}" y="2260" text-anchor="middle" font-size="15" fill="${GOLD}">سلام قولا من رب رحيم · قل هو الرحمن آمنا به وعليه توكلنا</text>
-  <text x="${W/2}" y="2310" text-anchor="middle" font-size="14" fill="${INK}" opacity="0.7">مجموع الأسماء الحسنى التسعة والتسعين بالجُمَّل ٣٦٨٠٨ · كل وفق متحقق الميزان</text>
+  <text x="${W/2}" y="2310" text-anchor="middle" font-size="14" fill="${INK}" opacity="0.7">مجموع الأسماء الحسنى التسعة والتسعين بالجُمَّل ٣٦٨٠٨ · كل وفق متحقق الميزان</text>${(function(){
+ const segW=(W-220)/7;
+ let out=`<text x="${W/2}" y="2380" text-anchor="middle" font-size="21" fill="${GOLD}">الأختام السبعة — the Seven Seals, traced from each verified square</text>`;
+ out+=CHALDEAN.map(function(k,i){
+  const p=PLANETS[k];
+  const cx=110+segW*i+segW/2,cy=2560,size=130;
+  const arName=p.name.split(" · ")[1]||p.name;
+  return sealGroup(p.order,p.hue,cx,cy,size)+`<text x="${cx}" y="${cy+size/2+30}" text-anchor="middle" font-size="15" fill="${INK}">${p.glyph} ${arName}</text>`;
+ }).join("");
+ return out;
+})()}
   </svg>`;
   $("#plate-mount").innerHTML=s;}
  $("#plate-dedication").addEventListener("input",buildPlate);
@@ -918,7 +1019,22 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
   a.download="al-lawh-al-jalil.svg";a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),4000);
   toast("Plate downloaded — print at A2 or larger.");});
- buildPlate();
+ function namesWafqHTML(){
+ const names=["الله"].concat(NINETY_NINE);
+ const n=10,cell=88;
+ let h='<div class="namewafq" style="grid-template-columns:repeat('+n+','+cell+'px);grid-template-rows:repeat('+n+','+cell+'px)">';
+ for(let i=0;i<n*n;i++){
+  const nm=names[i]||"";
+  h+='<div class="nc" style="width:'+cell+'px;height:'+cell+'px;font-size:14px" title="'+esc(nm)+'">'+esc(nm)+'</div>';
+ }
+ h+="</div>";
+ return h;
+}
+function renderNamesWafq(){
+ const host=$("#names-wafq-mount"); if(!host) return;
+ host.innerHTML=namesWafqHTML();
+}
+buildPlate();renderNamesWafq();
 })();
  
 /* ═══════════ PLANETARY HOURS ═══════════ */
@@ -1026,9 +1142,11 @@ function tick(){
   const ms=cur.end-now;
   const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000);
   $("#hr-countdown").innerHTML="⏳ "+m+"m "+pad2(s)+"s remaining in this planetary hour";
+  if($("#ribbon-hour"))$("#ribbon-hour").innerHTML="✳ "+m+"m "+pad2(s)+"s left in this hour";
  }
  const moon=moonInfo(now);
  if($("#hr-moon")) $("#hr-moon").innerHTML=moon.glyph+" "+moon.phaseName+" · lunar mansion "+moon.manzil+" of 28 · "+moon.illum+"% illuminated";
+  if($("#ribbon-moon"))$("#ribbon-moon").innerHTML=moon.glyph+" "+moon.phaseName;
 }
 /* ---- seven-day forecast ---- */
 function renderForecast(){
@@ -1047,6 +1165,22 @@ function renderForecast(){
 }
 tick();setInterval(tick,1000);
 renderForecast();
+function sealSVG(order,hue,cell){
+ const c=sealCoords(order,cell);
+ const pts=c.pts,size=c.size;
+ let ptsAttr=pts.map(function(p){return p[0]+","+p[1];}).join(" ");
+ let dots="";
+ for(let i=0;i<pts.length;i++){const p=pts[i];const isEnd=(i===0||i===pts.length-1);dots+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(isEnd?3.2:1.5)+'" fill="'+hue+'"/>';}
+ return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><polyline points="'+ptsAttr+'" fill="none" stroke="'+hue+'" stroke-width="1.6" stroke-linejoin="round" opacity="0.9"/>'+dots+'</svg>';
+}
+function renderSeals(){
+ const host=$("#hr-seals"); if(!host) return;
+ host.innerHTML=CHALDEAN.map(function(k){
+  const p=PLANETS[k];
+  return '<div class="sealcard">'+sealSVG(p.order,p.hue,16)+'<div class="mono" style="font-size:11px;margin-top:8px;color:'+p.hue+'">'+p.glyph+" "+p.name+' · seal of order '+p.order+'</div></div>';
+ }).join("");
+}
+renderSeals();
 })();
  
 /* ═══════════ SUPPORT ═══════════ */
@@ -1059,6 +1193,47 @@ renderForecast();
  if(placeholder&&!CONFIG.otherSupport)h+=`<div class="mono" style="font-size:12px;color:var(--faint);border:1px dashed #5fc9a855;padding:12px;border-radius:2px;max-width:520px;margin:0 auto">
   Site owner: open this file and set <b style="color:var(--sage)">CONFIG.paypal</b> at the top of the script to your PayPal.me link — the button appears here automatically.</div>`;
  box.innerHTML=h;
+})();
+
+/* ═══════════ COUNT-UP ═══════════ */
+(function(){
+ document.querySelectorAll(".cnt").forEach(function(el){
+  const target=parseInt(el.getAttribute("data-target"),10)||0;
+  const dur=1100,start=performance.now();
+  function step(now){
+   const p=Math.min(1,(now-start)/dur);
+   el.textContent=Math.round(target*(1-Math.pow(1-p,3)));
+   if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+ });
+})();
+/* ═══════════ PRINT ANY TALISMAN ═══════════ */
+(function(){
+ function printCard(el){
+  const styleTag=document.querySelector("head style");
+  const css=styleTag?styleTag.textContent:"";
+  const w=window.open("","_blank");
+  if(!w){return;}
+  w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Talisman — al-Sirr al-Jalīl</title><style>'+css+'body{background:#f2e7cd;padding:40px;display:flex;flex-direction:column;align-items:center;gap:14px}.printhead{font-family:var(--ar,serif);font-size:14px;color:#2a1f14;text-align:center;direction:rtl}</style></head><body><div class="printhead">al-Sirr al-Jalīl · sirraljlil.com</div>'+el.outerHTML+'</body></html>');
+  w.document.close();
+  setTimeout(function(){w.focus();w.print();},350);
+ }
+ function attachPrintButtons(){
+  document.querySelectorAll(".sq, .sealcard, .namewafq").forEach(function(sq){
+   if(sq.getAttribute("data-printable"))return;
+   sq.setAttribute("data-printable","1");
+   const btn=document.createElement("button");
+   btn.type="button";btn.className="btn sm printbtn";btn.textContent="🖨 Print this talisman";
+   btn.addEventListener("click",function(e){e.preventDefault();printCard(sq);});
+   if(sq.parentElement)sq.parentElement.insertBefore(btn,sq.nextSibling);
+  });
+ }
+ let scheduled=false;
+ function scheduleAttach(){if(scheduled)return;scheduled=true;setTimeout(function(){scheduled=false;attachPrintButtons();},500);}
+ const mo=new MutationObserver(scheduleAttach);
+ mo.observe(document.body,{childList:true,subtree:true});
+ scheduleAttach();
 })();
 </script>
 </body>
