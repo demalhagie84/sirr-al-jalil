@@ -9,7 +9,12 @@
 <meta property="og:description" content="Every square verified. Every count proven. The sword stays in the scabbard.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sirraljlil.com/">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://sirraljlil.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://sirraljlil.com/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0806'/%3E%3Cg stroke='%23e8b84f' stroke-width='2' fill='none'%3E%3Crect x='12' y='12' width='40' height='40'/%3E%3Cline x1='25.3' y1='12' x2='25.3' y2='52'/%3E%3Cline x1='38.6' y1='12' x2='38.6' y2='52'/%3E%3Cline x1='12' y1='25.3' x2='52' y2='25.3'/%3E%3Cline x1='12' y1='38.6' x2='52' y2='38.6'/%3E%3C/g%3E%3Crect x='26.5' y='26.5' width='11' height='11' fill='%23e8b84f'/%3E%3C/svg%3E">
 <meta name="twitter:title" content="al-Sirr al-Jalīl — The Well-Guarded Jewels">
 <meta name="twitter:description" content="A verified digital edition of al-Sirr al-Jalīl: every wafq rebuilt and balanced, a live planetary-hours clock keyed to your own horizon, a wird counter, and a printable talismanic plate.">
 <meta name="keywords" content="al-Sirr al-Jalil, Imam Shadhili, abjad calculator, awfaq, magic squares, planetary hours, wird counter, Islamic numerology, Hasbunallahu wa nimal wakil">
@@ -230,6 +235,130 @@ nav.top a.give{margin-left:8px}
 .scrollcue{display:block;margin:38px auto 0;text-align:center;color:var(--faint);font-size:11.5px;
  letter-spacing:.15em;text-transform:uppercase;animation:cueBounce 2.2s ease-in-out infinite}
 @keyframes cueBounce{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(6px);opacity:1}}:root{--ease:cubic-bezier(.16,1,.3,1)}.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.reveal.in{opacity:1;transform:translateY(0)}.card,.planetcard,.work,.hourcell,.fitcell{transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}.card:hover,.planetcard:hover{transform:translateY(-4px);box-shadow:0 14px 34px #00000055;border-color:#e8b84f77}.work:hover{transform:translateY(-2px)}.hourcell:hover{transform:translateY(-2px);border-color:#e8b84f66}.fitcell:not(.no):hover{transform:translateY(-2px)}.cta,.btn{transition:.25s var(--ease),transform .25s var(--ease)}.cta:hover,.btn:hover{transform:translateY(-2px)}.cta:active,.btn:active{transform:translateY(0) scale(.98)}nav.top{transition:box-shadow .4s var(--ease),background .4s var(--ease)}nav.top.scrolled{box-shadow:0 8px 30px #000000aa;background:#0b0806f5}section{padding:96px 0 40px}::-webkit-scrollbar{width:11px;height:11px}::-webkit-scrollbar-track{background:#0b0806}::-webkit-scrollbar-thumb{background:#c9a35c55;border-radius:6px;border:2px solid #0b0806}::-webkit-scrollbar-thumb:hover{background:#e8b84f88}
+
+/* ═══════════ ELEVATION · the doorway ═══════════ */
+.doorway{max-width:620px;margin:70px auto 0;text-align:center}
+.doorway .dq{font-family:var(--disp);font-style:italic;font-size:clamp(20px,3.2vw,27px);color:var(--bright);line-height:1.65}
+.doorway .dq b{color:var(--gold);font-style:normal;font-weight:500}
+.doorway .da{margin-top:16px;font-size:15px;color:var(--dim);line-height:1.9}
+.doorway .da b{color:var(--cream);font-weight:500}
+.sep{display:flex;align-items:center;gap:16px;max-width:460px;margin:0 auto;padding:34px 22px 0}
+.sep::before,.sep::after{content:"";flex:1;height:1px}
+.sep::before{background:linear-gradient(90deg,transparent,#c9a35c55)}
+.sep::after{background:linear-gradient(90deg,#c9a35c55,transparent)}
+.sep span{color:#c9a35c99;font-size:14px;line-height:1}
+
+/* ═══════════ ELEVATION · anatomy of the verse ═══════════ */
+.scrolly{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:44px;align-items:start}
+.scrolly .stage{position:sticky;top:86px;min-height:440px;display:flex;align-items:center;justify-content:center;padding:26px 8px}
+.scrolly .stagebox{position:relative;width:100%;min-height:400px}
+.stg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+ opacity:0;transform:translateY(16px) scale(.985);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
+.stg.live{opacity:1;transform:none;pointer-events:auto}
+.stg .bigverse{font-family:var(--ruqaa);font-size:clamp(30px,4.4vw,52px);color:var(--gold);direction:rtl;line-height:1.85;text-shadow:0 0 46px #e8b84f30}
+.stg .smtr{font-family:var(--disp);font-style:italic;font-size:16px;color:var(--dim);margin-top:10px}
+.stg .ltgrid{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;direction:rtl;max-width:430px}
+.stg .ltgrid .lt{min-width:38px}
+.stg .big450{font-family:var(--mono);font-size:clamp(64px,9vw,110px);color:var(--gold);line-height:1;text-shadow:0 0 60px #e8b84f44}
+.stg .sumline{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:12px}
+.stg .trio{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.stg .trio .tcard{border:1px solid #e8b84f55;background:#00000055;border-radius:3px;padding:16px 20px;min-width:128px;
+ opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.stg.live .trio .tcard{opacity:1;transform:none}
+.stg.live .trio .tcard:nth-child(2){transition-delay:.15s}
+.stg.live .trio .tcard:nth-child(3){transition-delay:.3s}
+.stg .tcard .ta{font-family:var(--ar);font-size:30px;color:var(--gold)}
+.stg .tcard .tv{font-family:var(--mono);font-size:19px;color:var(--cream);margin-top:2px}
+.stg .tcard .tt{font-size:12px;color:var(--dim);margin-top:4px}
+.stg .swordline{font-family:var(--ar);font-size:clamp(24px,3.4vw,34px);color:var(--ember);direction:rtl;line-height:1.9}
+.stg .swordtr{font-family:var(--disp);font-style:italic;font-size:17px;color:var(--cream);margin-top:12px;max-width:380px;line-height:1.7}
+.scrolly .steps{display:flex;flex-direction:column;gap:34vh;padding:16vh 0 30vh}
+.scrolly .step{opacity:.25;transition:opacity .55s var(--ease);max-width:430px}
+.scrolly .step.on{opacity:1}
+.step .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.step h3{font-family:var(--disp);font-size:23px;color:var(--bright);margin-bottom:9px;font-weight:500}
+.step p{font-size:14.5px;color:var(--dim);line-height:1.85}
+.step p b{color:var(--cream);font-weight:500}
+.step .arq{font-family:var(--ar);font-size:18px;color:var(--gold);direction:rtl;line-height:2;margin:10px 0 4px}
+@media(max-width:820px){
+ .scrolly{grid-template-columns:1fr;gap:0}
+ .scrolly .stage{position:sticky;top:56px;min-height:300px;background:linear-gradient(#0b0806 88%,#0b080600);z-index:2;padding:10px 4px 26px}
+ .scrolly .stagebox{min-height:264px}
+ .stg .big450{font-size:60px}
+ .stg .bigverse{font-size:27px}
+ .stg .trio{gap:6px}
+ .stg .trio .tcard{padding:8px 6px;min-width:86px}
+ .stg .tcard .ta{font-size:20px}
+ .stg .tcard .tv{font-size:14px}
+ .stg .tcard .tt{font-size:10px}
+ .stg .ltgrid{max-width:340px}
+ .stg .ltgrid .lt{min-width:30px;padding:4px 5px}
+ .stg .swordline{font-size:22px}
+ .stg .swordtr{font-size:14.5px}
+ .scrolly .steps{gap:46vh;padding:6vh 0 26vh}
+}
+@media(prefers-reduced-motion:reduce){
+ .scrolly .stage{position:static;min-height:0}
+ .stg{position:static;opacity:1;transform:none;margin-bottom:34px}
+ .scrolly .steps{gap:40px;padding:0}
+ .scrolly .step{opacity:1}
+}
+.scrolly.flat .stage{position:static;min-height:0}
+.scrolly.flat .stagebox{min-height:0}
+.scrolly.flat .stg{position:static;opacity:1;transform:none;margin-bottom:34px;pointer-events:auto}
+.scrolly.flat .steps{gap:40px;padding:0}
+.scrolly.flat .step{opacity:1}
+
+/* ═══════════ ELEVATION · the path of forty ═══════════ */
+.path-wrap{display:flex;gap:44px;flex-wrap:wrap;align-items:flex-start}
+.path-grid{display:inline-grid;grid-template-columns:repeat(8,1fr);gap:4px;direction:rtl;background:#00000066;
+ border:2px solid #5fc9a866;padding:7px;border-radius:3px;box-shadow:0 0 34px #5fc9a81e, inset 0 0 24px #00000088}
+.path-grid .pd{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #5fc9a82e;
+ font-family:var(--mono);font-size:12.5px;color:#ffffff55;cursor:pointer;transition:.3s var(--ease);user-select:none}
+.path-grid .pd:hover{border-color:#5fc9a888;color:var(--sage)}
+.path-grid .pd.done{background:#5fc9a824;color:var(--sage);border-color:#5fc9a877}
+.path-grid .pd.part{background:#5fc9a810;color:#5fc9a899}
+.path-grid .pd.today{border-color:var(--gold);color:var(--gold);box-shadow:0 0 16px #e8b84f3e;font-weight:600}
+.path-grid .pd.today.done{background:#e8b84f1e;color:var(--gold)}
+.path-grid .pd.future{cursor:default;opacity:.45}
+.path-day{border:1px solid #5fc9a855;background:linear-gradient(160deg,#5fc9a80c,transparent);padding:22px;border-radius:4px;flex:1;min-width:300px;max-width:560px}
+.path-day .ph-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage)}
+.path-day h3{font-family:var(--disp);font-size:23px;color:var(--bright);margin:4px 0 2px;font-weight:500}
+.path-day .ph-sub{font-family:var(--ar);font-size:16px;color:#5fc9a8bb;direction:rtl;margin-bottom:12px}
+.chk{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #ffffff10;cursor:pointer}
+.chk:last-of-type{border-bottom:none}
+.chk input{accent-color:#5fc9a8;width:17px;height:17px;margin-top:3px;flex:none;cursor:pointer}
+.chk .cl{font-size:14px;color:var(--cream);line-height:1.55}
+.chk .cl small{display:block;font-size:12px;color:var(--faint);margin-top:1px}
+.chk .cl .ar{font-size:15.5px;color:#c9d8cf}
+.chk.off .cl{color:var(--dim)}
+.path-note{width:100%;margin-top:12px;min-height:56px;resize:vertical;font-size:14px}
+.path-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.path-milestone{border:1px solid #e8b84f55;background:#e8b84f0c;border-radius:3px;padding:14px 16px;margin-top:16px;
+ font-family:var(--ar);font-size:17px;color:var(--gold);direction:rtl;line-height:2}
+.path-milestone small{display:block;direction:ltr;font-family:var(--disp);font-style:italic;font-size:13.5px;color:var(--dim);margin-top:6px}
+.path-begin{border:1px solid #5fc9a866;background:linear-gradient(160deg,#5fc9a80e,transparent);border-radius:4px;
+ padding:30px;text-align:center;max-width:640px}
+.path-begin .ba{font-family:var(--ar);font-size:24px;color:var(--sage);direction:rtl;margin-bottom:10px}
+.path-phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0;text-align:right}
+.path-phases .pp{border:1px solid #5fc9a833;padding:11px 13px;border-radius:3px}
+.path-phases .pp .pa{font-family:var(--ar);font-size:17px;color:var(--sage);direction:rtl}
+.path-phases .pp .pe{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:3px;text-align:right}
+.path-phases .pp .pd2{font-size:12px;color:var(--dim);margin-top:5px;text-align:right}
+.streakline{font-family:var(--mono);font-size:12px;color:var(--sage);margin-top:12px;letter-spacing:.06em}
+@media(max-width:560px){.path-grid .pd{width:34px;height:34px;font-size:11px}}
+
+/* ═══════════ ELEVATION · quiet polish ═══════════ */
+.hero .tr{margin-top:6px}
+.lede{line-height:1.95}
+.sec-sub{margin-bottom:32px}
+.about-edition{max-width:720px;margin:56px auto 0;text-align:center;font-size:13px;color:var(--faint);line-height:2}
+.about-edition b{color:var(--dim);font-weight:500}
+@media(max-width:520px){
+ .hero .stats{line-height:2.2}
+ section{padding:70px 0 30px}
+ .wird-wrap{justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -240,6 +369,7 @@ nav.top a.give{margin-left:8px}
   <a class="lnk" href="#forge">Forge</a>
   <a class="lnk" href="#hours">Hours</a>
   <a class="lnk" href="#works">Works</a>
+  <a class="lnk" href="#path">Path</a>
   <a class="lnk" href="#wird">Wird</a>
   <a class="lnk" href="#plate">Plate</a>
   <span class="navhour" id="nav-hour"></span>
@@ -257,6 +387,11 @@ nav.top a.give{margin-left:8px}
     <a class="cta" href="#atlas">Enter the Atlas</a>
     <a class="cta ember" href="#plate">The Great Plate</a>
   </div>
+  <div class="sep hero-anim" style="animation-delay:.7s"><span>✳</span></div>
+  <div class="doorway hero-anim" style="animation-delay:.8s">
+    <p class="dq">If you have ever lain awake over a debt, a rival, a verdict, a door that will not open — this book was written for you, seven centuries ago, about one sentence.</p>
+    <p class="da">And its great secret is not hidden in the squares and hours below. It stands openly on <b>the first page</b>: the verse needs no observation, no ascendant, no appointed time — «it is an unsheathed sword». Sufficiency is not a technique; it is a turning of the heart called <b>tawakkul</b>. Every square, every count, every hour on this page is commentary on that turning. Begin where the book begins.</p>
+  </div>
   <div class="scrollcue hero-anim" style="animation-delay:.9s">⌄ descend into the treatise ⌄</div>
   <p class="lede" style="margin:34px auto 0;text-align:center">
     A verified digital edition of <i>al-Sirr al-Jalīl fī khawāṣṣ Ḥasbunallāhu wa-niʿma al-wakīl</i> —
@@ -269,18 +404,65 @@ nav.top a.give{margin-left:8px}
  
 <section id="maqam"><div class="container">
   <div class="eyebrow">المقام</div>
-  <h2 class="sec-title">The Maqām of the Verse</h2>
-  <div class="sec-sub">the anatomy, the trinity of 150, and the errata the arithmetic caught</div>
-  <div class="letters" id="letter-anatomy"></div>
-  <div class="mono" style="font-size:13px;color:var(--dim);margin-top:10px">
-    19 letters — the count of the Basmala and of ﴿عليها تسعة عشر﴾ · total <b style="color:var(--gold);font-size:18px">450</b>
+  <h2 class="sec-title">The Anatomy of the Verse</h2>
+  <div class="sec-sub">scroll — and watch nineteen letters become a sword</div>
+  <div class="scrolly" id="anatomy">
+    <div class="stage"><div class="stagebox">
+      <div class="stg live" data-stg="1">
+        <div class="bigverse">﴿حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ﴾</div>
+        <div class="smtr">“Allah suffices us, and what an excellent Guardian He is.”</div>
+      </div>
+      <div class="stg" data-stg="2">
+        <div class="letters ltgrid" id="letter-anatomy"></div>
+        <div class="sumline">19 letters · the count of the Basmala</div>
+      </div>
+      <div class="stg" data-stg="3">
+        <div class="big450" id="anat-450">450</div>
+        <div class="sumline">the sum of the letters, by the reckoning</div>
+      </div>
+      <div class="stg" data-stg="4">
+        <div class="trio">
+          <div class="tcard"><div class="ta">عليم</div><div class="tv">150</div><div class="tt">ʿAlīm — knowledge</div></div>
+          <div class="tcard"><div class="ta">سلطان</div><div class="tv">150</div><div class="tt">Sulṭān — authority</div></div>
+          <div class="tcard"><div class="ta">سيف</div><div class="tv">150</div><div class="tt">Sayf — decisive force</div></div>
+        </div>
+        <div class="sumline" style="margin-top:18px">450 = 150 + 150 + 150</div>
+      </div>
+      <div class="stg" data-stg="5">
+        <div class="swordline">سَيْفٌ مَسْلُولٌ</div>
+        <div class="swordtr">“An unsheathed sword — needing no observation, no ascendant, no appointed time.” The secret was never the arithmetic. It is the heart that means the words.</div>
+      </div>
+    </div></div>
+    <div class="steps" id="anat-steps">
+      <div class="step on" data-step="1">
+        <div class="k">One sentence</div>
+        <h3>Said twice, at the edge of ruin</h3>
+        <p>Ibrāhīm said it as he was thrown into the fire. The Prophet ﷺ and his companions said it, wounded, marching out to meet an army — ﴾those to whom the people said: they have gathered against you, so fear them﴿ — and it only increased them in faith (Āl ʿImrān 173). Both times the fire cooled and the enemy scattered. This treatise is a seven-hundred-year meditation on <b>why</b>.</p>
+      </div>
+      <div class="step" data-step="2">
+        <div class="k">The letters</div>
+        <h3>Nineteen letters</h3>
+        <p>Strip the vowel marks and count what remains: <b>nineteen</b> — the number of letters in the Basmala, and a number the Qurʾān itself singles out: ﴿عَلَيْهَا تِسْعَةَ عَشَرَ﴾. Hover any letter to see the value it carries.</p>
+      </div>
+      <div class="step" data-step="3">
+        <div class="k">The reckoning</div>
+        <h3>They sum to 450</h3>
+        <p>Give each letter its abjad value and add them: <b>450, exactly</b>. Every square on this page — rows, columns, diagonals — is built to close on this one number, and your browser re-proves each of them every time the page loads.</p>
+      </div>
+      <div class="step" data-step="4">
+        <div class="k">The trinity</div>
+        <h3>450 breaks into three 150s</h3>
+        <p>Chapter 5's stated secret: the number divides into three equal parts, and each part is itself a word. <b>ʿAlīm</b> — to know. <b>Sulṭān</b> — to stand with authority. <b>Sayf</b> — to cut through. «Behind this number is an amazing secret suggesting a sultan and a sword.»</p>
+      </div>
+      <div class="step" data-step="5">
+        <div class="k">The first page</div>
+        <h3>And none of it is required</h3>
+        <p>Here is what most readers rush past: before a single square is drawn, the book's first page says the verse works with <b>no timing, no instrument, no condition</b> — an unsheathed sword. The arithmetic is commentary. The secret is tawakkul — the turned heart. Kept with presence, Bāb 3 says, it</p>
+        <div class="arq">تُورِثُ الْمُكَاشَفَاتِ</div>
+        <p><i>— produces unveilings.</i> Everything below is for those who want to see how deep the commentary goes.</p>
+      </div>
+    </div>
   </div>
-  <div class="grid g3" style="margin-top:26px;max-width:780px" id="sirr450"></div>
-  <p class="lede" style="margin-top:14px">Chapter 5's stated secret: 450 divides into three parts of 150 — the name
-    <b style="color:var(--bright)">ʿAlīm</b>, the word <b style="color:var(--bright)">Sulṭān</b>, the word
-    <b style="color:var(--bright)">Sayf</b>. Knowledge, authority, decisive force. «Behind this number is an amazing
-    secret suggesting a sultan and a sword» — and Bāb 3 adds that the verse, kept with its conditions,
-    تورث المكاشفات — <i>produces unveilings</i>.</p>
   
   <div style="margin-top:26px">
     <div class="eyebrow">The Sword Study — the seven counts as pure number-science</div>
@@ -382,6 +564,17 @@ nav.top a.give{margin-left:8px}
   </div>
 </div></section>
  
+<section id="path"><div class="container">
+  <div class="eyebrow" style="color:var(--sage)">الأربعون</div>
+  <h2 class="sec-title">The Path of Forty</h2>
+  <div class="sec-sub">the treatise's own daily program, walked one day at a time · everything stays on your device</div>
+  <div id="path-mount"></div>
+  <p class="lede" style="margin-top:26px;font-size:13.5px">Forty days is the tradition's unit of transformation — the khalwa, the arbaʿīniyya.
+  The counts here ascend gently toward the book's own prescription — the verse <b style="color:var(--cream)">450 by day and night</b> — and the final ten days
+  seal each recitation with the sixfold fanqalabū and the single riḍwān, exactly as Bāb 1 closes the foundation. Nothing on this path is operative
+  sword-work; it is the licit daily program of the treatise, nothing more and nothing less. If you miss a day, the day simply stays open — return and continue.</p>
+</div></section>
+ 
 <section id="wird"><div class="container">
   <div class="eyebrow">الورد</div>
   <h2 class="sec-title">The Wird</h2>
@@ -442,6 +635,12 @@ nav.top a.give{margin-left:8px}
     with gratitude and duʿāʾ. If not — recite the verse once for this servant and that is more than enough.</p>
     <div id="support-buttons"></div>
     <p class="mono" style="font-size:10.5px;color:var(--faint);margin-top:14px">no accounts · no tracking · your wird counts never leave your device</p>
+  </div>
+  <div class="about-edition">
+    <b>How this edition was verified.</b> Every constant on this page is recomputed in your browser each time it loads — no square is an image, and none is trusted from memory.
+    The text rests on two witnesses, the Cairo Arabic printing of 1349 AH and its English translation, read against each other; where they disagreed, the arithmetic decided,
+    and the five corrections are published openly above. The editor is a student of this literature, not a shaykh — nothing here replaces a living teacher,
+    and the ādāb the masters set come before any square.
   </div>
 </div></section>
  
@@ -735,7 +934,7 @@ function okChip(k,extra){return `<div class="ok">✓ verified live — rows &amp
  $("#hero-verse").innerHTML="﴿"+words.map(w=>`<span data-v="${abjad(w).sum}">${w}</span>`).join(" ")+"﴾";
  $("#letter-anatomy").innerHTML=abjad(HASB).parts.map(p=>
   `<div class="lt"><div class="g">${p.ch}</div><div class="v">${p.v}</div></div>`).join("");
- $("#sirr450").innerHTML=SIRR_450.map(x=>`<div class="card" style="text-align:center;border-color:#e8b84f55">
+ const s450=$("#sirr450");if(s450)s450.innerHTML=SIRR_450.map(x=>`<div class="card" style="text-align:center;border-color:#e8b84f55">
   <div class="ar" style="font-size:30px;color:var(--gold)">${x.name}</div>
   <div class="mono" style="font-size:20px">${x.v}</div>
   <div style="font-size:12.5px;color:var(--dim);margin-top:4px">${x.tr} — ${x.gloss}</div></div>`).join("");
@@ -1228,6 +1427,159 @@ renderForecast();
  scheduleAttach();
 })();
 </script>
+<script>
+/* ═══════════ ELEVATION · anatomy scrollytelling ═══════════ */
+(function(){
+ var wrap=document.getElementById("anatomy");if(!wrap)return;
+ var steps=[].slice.call(wrap.querySelectorAll(".step"));
+ var stgs=[].slice.call(wrap.querySelectorAll(".stg"));
+ var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(!("IntersectionObserver" in window)||reduce){wrap.classList.add("flat");
+  steps.forEach(function(s){s.classList.add("on")});stgs.forEach(function(s){s.classList.add("live")});return;}
+ var current=1,el450=document.getElementById("anat-450");
+ function count450(){if(!el450)return;var start=performance.now(),dur=900;
+  function st(now){var p=Math.min(1,(now-start)/dur);
+   el450.textContent=Math.round(450*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(st);}
+  requestAnimationFrame(st);}
+ function setStage(k){if(k===current)return;current=k;
+  steps.forEach(function(s){s.classList.toggle("on",+s.getAttribute("data-step")===k);});
+  stgs.forEach(function(s){s.classList.toggle("live",+s.getAttribute("data-stg")===k);});
+  if(k===3)count450();}
+ var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)setStage(+e.target.getAttribute("data-step"));});
+ },{rootMargin:"-42% 0px -42% 0px",threshold:0});
+ steps.forEach(function(s){io.observe(s);});
+})();
+/* ═══════════ ELEVATION · the path of forty ═══════════ */
+(function(){
+ var mount=document.getElementById("path-mount");if(!mount)return;
+ var KEY="sirr-path-v1";
+ var PHASES=[
+  {from:1,to:10,ar:"التأسيس",en:"Groundwork",vcount:100,vlabel:"حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ ×١٠٠",vnote:"one hundred — building constancy toward the book's 450"},
+  {from:11,to:20,ar:"الرسوخ",en:"Rooting",vcount:313,vlabel:"حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ ×٣١٣",vnote:"three hundred and thirteen — the book's recurring count"},
+  {from:21,to:30,ar:"التمام",en:"Fullness",vcount:450,vlabel:"حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ ×٤٥٠",vnote:"four hundred and fifty — the full prescription of Bāb 1"},
+  {from:31,to:40,ar:"الختم",en:"Sealing",vcount:450,seal:true,vlabel:"حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ ×٤٥٠",vnote:"the full count, now sealed as the book seals it"}];
+ var MILE={
+  10:{ar:"«إِذَا قَالَ الْعَبْدُ حَسْبِيَ اللهُ قَالَ اللهُ تَعَالَى لَأَكْفِيَنَّهُ»",en:"Ten days kept. This is the promise attached to the words you have been saying: Allah Himself answers — I will surely suffice him."},
+  20:{ar:"تُورِثُ الْمُكَاشَفَاتِ",en:"Twenty days. Bāb 3's word for what constancy produces: unveilings. Not visions — clarity about what was always true."},
+  30:{ar:"أَعْظَمُ الْكَرَامَاتِ الِاسْتِقَامَةُ",en:"Thirty days. The Shādhilī measure of a miracle: that you are still here, still counting."},
+  40:{ar:"﴿فَانْقَلَبُوا بِنِعْمَةٍ مِنَ اللهِ وَفَضْلٍ لَمْ يَمْسَسْهُمْ سُوءٌ﴾",en:"Forty days, sealed. They returned with favor from Allah and bounty, untouched by harm. Begin the forty again — or simply keep the 3+3. The path was never forty days long; it is the rest of a life."}};
+ function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+ function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
+ function save(st){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+ function toastMsg(m){var t=document.getElementById("toast");if(!t)return;t.textContent=m;t.style.display="block";
+  clearTimeout(toastMsg._t);toastMsg._t=setTimeout(function(){t.style.display="none"},2800);}
+ function todayIdx(st){var s=new Date(st.start+"T00:00:00");var n=new Date();n.setHours(0,0,0,0);
+  return Math.floor((n-s)/86400000)+1;}
+ function phaseOf(d){for(var i=0;i<PHASES.length;i++)if(d>=PHASES[i].from&&d<=PHASES[i].to)return PHASES[i];return PHASES[3];}
+ function tasksOf(d){var ph=phaseOf(d);var t=[
+  {k:"m",ar:"حَسْبِيَ اللهُ وَنِعْمَ الْوَكِيلُ ×٣",en:"Morning — three at dawn",sub:"«three when he rises… he remains in the safety of Allah»"},
+  {k:"t",ar:"الْعَشْرُ الْحَسْبِيَّات",en:"The ten ḥasbiyas after Fajr",sub:"five for this life, five for the next — full text in the Works above"},
+  {k:"v",ar:ph.vlabel,en:"The verse — "+ph.vcount+" today",sub:ph.vnote},
+  {k:"e",ar:"حَسْبِيَ اللهُ وَنِعْمَ الْوَكِيلُ ×٣",en:"Evening — three at dusk",sub:"«and three when night falls»"}];
+  if(ph.seal)t.push({k:"s",ar:"﴿فَانْقَلَبُوا﴾ ×٦ · ﴿وَاتَّبَعُوا رِضْوَانَ اللهِ﴾ ×١",en:"The seal",sub:"the sixfold fanqalabū and the single riḍwān — the seventh completes"});
+  return t;}
+ function isDone(st,d){var rec=st.days[d];if(!rec)return false;
+  var ks=phaseOf(d).seal?["m","t","v","e","s"]:["m","t","v","e"];
+  return ks.every(function(k){return rec[k]});}
+ function isPart(st,d){var rec=st.days[d];if(!rec)return false;
+  return ["m","t","v","e","s"].some(function(k){return rec[k]});}
+ var sel=null,armed=false;
+ function beginHTML(){
+  return '<div class="path-begin">'
+  +'<div class="ba" lang="ar">مَنْ أَخْلَصَ لِلَّهِ أَرْبَعِينَ صَبَاحًا ظَهَرَتْ يَنَابِيعُ الْحِكْمَةِ مِنْ قَلْبِهِ عَلَى لِسَانِهِ</div>'
+  +'<p class="lede" style="margin:0 auto 4px;text-align:center">“Whoever is sincere to Allah for forty mornings, springs of wisdom appear from his heart upon his tongue.” Four phases, one sentence, forty days:</p>'
+  +'<div class="path-phases">'+PHASES.map(function(p){
+    return '<div class="pp"><div class="pa" lang="ar">'+p.ar+'</div><div class="pe">'+p.en+' · days '+p.from+'–'+p.to+'</div><div class="pd2">'+esc(p.vnote)+(p.seal?" + the seal":"")+'</div></div>';}).join("")
+  +'</div>'
+  +'<button class="cta sage" id="path-begin-btn" type="button">Begin — day one is today</button>'
+  +'<p class="mono" style="font-size:10.5px;color:var(--faint);margin-top:14px">your progress and notes never leave this device</p>'
+  +'</div>';}
+ function render(){
+  var st=load();
+  if(!st){mount.innerHTML=beginHTML();return;}
+  var rawToday=todayIdx(st);
+  var today=Math.min(Math.max(rawToday,1),40);
+  if(sel==null||sel>today)sel=today;
+  var doneCount=0;for(var i=1;i<=40;i++)if(isDone(st,i))doneCount++;
+  var streak=0,d=today;if(!isDone(st,d))d--;
+  for(;d>=1;d--){if(isDone(st,d))streak++;else break;}
+  var cells="";
+  for(var n=1;n<=40;n++){
+   var cls="pd";
+   if(isDone(st,n))cls+=" done";else if(isPart(st,n))cls+=" part";
+   if(n===today)cls+=" today";
+   if(n>today)cls+=" future";
+   cells+='<div class="'+cls+'" data-pd="'+n+'" title="Day '+n+'">'+n+'</div>';}
+  var ph=phaseOf(sel),rec=st.days[sel]||{};
+  var rows=tasksOf(sel).map(function(t){
+   var on=!!rec[t.k];
+   return '<label class="chk'+(on?"":" off")+'"><input type="checkbox" data-k="'+t.k+'"'+(on?" checked":"")+'>'
+   +'<span class="cl"><span class="ar" lang="ar">'+t.ar+'</span> — '+esc(t.en)+'<small>'+esc(t.sub)+'</small></span></label>';}).join("");
+  var mileHTML="";
+  var gate=(sel===10||sel===20||sel===30||sel===40);
+  if(gate&&isDone(st,sel))mileHTML='<div class="path-milestone" lang="ar">'+MILE[sel].ar+'<small>'+esc(MILE[sel].en)+'</small></div>';
+  else if(doneCount===40)mileHTML='<div class="path-milestone" lang="ar">'+MILE[40].ar+'<small>'+esc(MILE[40].en)+'</small></div>';
+  mount.innerHTML='<div class="path-wrap">'
+  +'<div><div class="path-grid" id="path-grid">'+cells+'</div>'
+  +'<div class="streakline">'+doneCount+' of 40 complete · streak '+streak+(rawToday>40?" · the forty have passed — finish the open days or begin again":"")+'</div></div>'
+  +'<div class="path-day">'
+  +'<div class="ph-tag">Day '+sel+' of 40 · '+ph.en+'</div>'
+  +'<h3>'+(sel===today?"Today":"Day "+sel)+'</h3>'
+  +'<div class="ph-sub" lang="ar">'+ph.ar+'</div>'
+  +rows
+  +'<textarea class="path-note" id="path-note" placeholder="One line — what did the verse meet today?">'+esc(rec.note)+'</textarea>'
+  +'<div class="path-actions">'
+  +'<button class="btn sage sm" id="path-dial" type="button">Open the dial · العدّ</button>'
+  +'<button class="btn sage sm" id="path-export" type="button">Export notes</button>'
+  +'<button class="btn warn sm" id="path-restart" type="button">Restart the forty</button>'
+  +'</div>'+mileHTML+'</div></div>';}
+ mount.addEventListener("click",function(e){
+  var b=e.target.closest("[data-pd]");
+  if(b){var n=+b.getAttribute("data-pd");var st=load();if(!st)return;
+   if(n<=Math.min(Math.max(todayIdx(st),1),40)){sel=n;render();}return;}
+  if(e.target.id==="path-begin-btn"){
+   var t=new Date();t.setHours(0,0,0,0);
+   var iso=t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0");
+   save({start:iso,days:{}});sel=1;render();
+   toastMsg("The forty begin. Day one is today — بسم الله.");return;}
+  if(e.target.id==="path-dial"){
+   var w=document.getElementById("wird");if(w)w.scrollIntoView({behavior:"smooth"});
+   var tb=document.querySelector('[data-wt="0"]');if(tb)tb.click();return;}
+  if(e.target.id==="path-export"){
+   var st=load();if(!st)return;var lines=["The Path of Forty — al-Sirr al-Jalil · started "+st.start,""];
+   for(var n2=1;n2<=40;n2++){var r=st.days[n2];if(!r)continue;
+    lines.push("Day "+n2+(isDone(st,n2)?" ✓":"")+(r.note?" — "+r.note:""));}
+   var blob=new Blob([lines.join("\n")],{type:"text/plain"});
+   var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="sirr-al-jalil-path-of-forty.txt";a.click();
+   setTimeout(function(){URL.revokeObjectURL(a.href)},4000);toastMsg("Notes exported — check your downloads.");return;}
+  if(e.target.id==="path-restart"){
+   if(!armed){armed=true;toastMsg("Tap Restart once more to erase the forty and begin again.");
+    setTimeout(function(){armed=false},5000);return;}
+   try{localStorage.removeItem(KEY)}catch(err){}
+   sel=null;armed=false;render();toastMsg("The forty are cleared. Begin when you are ready.");return;}
+ });
+ mount.addEventListener("change",function(e){
+  var k=e.target.getAttribute&&e.target.getAttribute("data-k");if(!k)return;
+  var st=load();if(!st)return;
+  if(!st.days[sel])st.days[sel]={};
+  var ta=document.getElementById("path-note");if(ta)st.days[sel].note=ta.value;
+  st.days[sel][k]=e.target.checked?1:0;save(st);
+  var wasDone=isDone(st,sel);render();
+  if(wasDone){var gates={10:1,20:1,30:1,40:1};
+   toastMsg(gates[sel]?"Day "+sel+" sealed — a milestone. Read it below the checklist.":"Day "+sel+" complete — تقبل الله.");}
+ });
+ var noteTimer=null;
+ mount.addEventListener("input",function(e){
+  if(e.target.id!=="path-note")return;
+  clearTimeout(noteTimer);var v=e.target.value;
+  noteTimer=setTimeout(function(){var st=load();if(!st)return;
+   if(!st.days[sel])st.days[sel]={};st.days[sel].note=v;save(st);},400);
+ });
+ render();
+})();
+
+</script>
 <style id="asst-style">
 #asst-fab{position:fixed;right:22px;bottom:22px;z-index:9999;width:54px;height:54px;border-radius:50%;background:var(--bg2);border:1px solid var(--gold);color:var(--gold);font-size:22px;cursor:pointer;box-shadow:0 6px 20px #00000066;transition:.25s}
 #asst-fab:hover{background:var(--gold);color:var(--ink)}
@@ -1329,4 +1681,3 @@ renderForecast();
 </script>
 <script>(function(){try{var sections=document.querySelectorAll("section");if(!("IntersectionObserver" in window)){sections.forEach(function(s){s.classList.add("reveal","in");});return;}sections.forEach(function(s){s.classList.add("reveal");});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0});sections.forEach(function(s){io.observe(s);});var nav=document.querySelector("nav.top");if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>18);},{passive:true});}}catch(e){}})();</script><script>(function(){try{document.querySelectorAll(".ar,.artext,.bismillah,.verse").forEach(function(el){if(!el.getAttribute("lang"))el.setAttribute("lang","ar");});}catch(e){}})();</script><canvas id="sky-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;transition:opacity 1s ease;"></canvas><script>(function(){const canvas=document.getElementById("sky-canvas");if(!canvas)return;const ctx=canvas.getContext("2d");let w,h,stars=[],shooting=[];function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}window.addEventListener("resize",resize);resize();const STAR_COUNT=140;for(let i=0;i<STAR_COUNT;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+0.2,phase:Math.random()*Math.PI*2,speed:0.5+Math.random()*1.5});}function maybeSpawn(){if(Math.random()<0.004&&shooting.length<2){const startX=Math.random()*w*0.7;const startY=Math.random()*h*0.3;const angle=Math.PI/4+Math.random()*0.3;shooting.push({x:startX,y:startY,angle:angle,len:0,maxLen:120+Math.random()*80,speed:8+Math.random()*4,life:1});}}function draw(){ctx.clearRect(0,0,w,h);const t=Date.now()/1000;for(const s of stars){const tw=0.5+0.5*Math.sin(t*s.speed+s.phase);ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(244,236,216,"+(0.25+0.65*tw)+")";ctx.fill();}maybeSpawn();for(let i=shooting.length-1;i>=0;i--){const sh=shooting[i];sh.len+=sh.speed;sh.life-=0.012;const ex=sh.x+Math.cos(sh.angle)*sh.len;const ey=sh.y+Math.sin(sh.angle)*sh.len;const bl=Math.max(0,sh.len-sh.maxLen);const sx=sh.x+Math.cos(sh.angle)*bl;const sy=sh.y+Math.sin(sh.angle)*bl;const grad=ctx.createLinearGradient(sx,sy,ex,ey);grad.addColorStop(0,"rgba(232,184,79,0)");grad.addColorStop(1,"rgba(244,236,216,"+Math.max(0,sh.life)+")");ctx.strokeStyle=grad;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();if(sh.life<=0||sh.len>sh.maxLen+300)shooting.splice(i,1);}requestAnimationFrame(draw);}draw();})();</script><script>(function(){const el=document.getElementById("ribbon-hijri");if(!el)return;try{const f=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura",{day:"numeric",month:"long",year:"numeric"});let hs=f.format(new Date());if(!/AH\s*$/i.test(hs))hs+=" AH";el.textContent=hs;}catch(e){}})();</script></body>
 </html>
- 
