@@ -380,9 +380,21 @@ nav.top a.lnk.active::after{content:'';position:absolute;left:9px;right:9px;bott
   nav.top .brand{flex:0 0 auto}
   #embersCanvas{opacity:.35}
 }
+
+/* ═══════════ Plate & Names-wafq lightbox / zoom ═══════════ */
+.zoomable{cursor:zoom-in;transition:box-shadow .3s var(--ease);position:relative}
+.zoomable::after{content:"\2922";position:absolute;top:8px;right:8px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:#00000088;border:1px solid #c9a35c55;border-radius:3px;color:var(--gold);font-size:13px;opacity:0;transition:opacity .25s var(--ease);pointer-events:none}
+.zoomable:hover::after{opacity:1}
+.zoomable.zoomed{position:fixed!important;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;max-width:94vw;max-height:88vh;overflow:auto;box-shadow:0 0 90px #000000dd,0 0 60px #c9a35c33;cursor:zoom-out;background:var(--bg)}
+.zoomable.zoomed::after{content:"\2715 close";width:auto;padding:2px 10px;top:-28px;right:0;opacity:1;font-family:var(--mono);font-size:10px;letter-spacing:.08em;background:transparent;border:none}
+#lightboxBackdrop{position:fixed;inset:0;background:#050302cc;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);z-index:9998;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+#lightboxBackdrop.show{opacity:1;pointer-events:auto}
+body.lightbox-open{overflow:hidden}
+@media(max-width:640px){.zoomable.zoomed{max-width:98vw;max-height:92vh}}
+@media(prefers-reduced-motion:reduce){.zoomable.zoomed{transition:none}}
 </style>
 </head>
-<body><div id="progressBar"></div><div id="cursorGlow"></div><canvas id="embersCanvas"></canvas>
+<body><div id="lightboxBackdrop" aria-hidden="true"></div><div id="progressBar"></div><div id="cursorGlow"></div><canvas id="embersCanvas"></canvas>
 <nav class="top"><div class="container row">
   <a class="brand" href="#top">al-Sirr <b>al-Jalīl</b></a>
   <a class="lnk" href="#maqam">Maqām</a><a class="lnk" href="#tashihat">Taṣḥīḥāt</a>
@@ -641,9 +653,9 @@ nav.top a.lnk.active::after{content:'';position:absolute;left:9px;right:9px;bott
   the Ikhlāṣ shared wafq, the Great 19×19, the six small seals, the six working names, both 7×7 word squares,
   the hollow five, Dhū’l-Jalāl, the vocatives of height. Handwritten beats printed — the book asks musk,
   rose water, and saffron of the one who copies it by hand. Below the plate, the Grand Wafq of the Ninety-Nine Names and their Owner — one hundred boxes, printable on its own.</p>
-  <div class="plate-frame"><div id="plate-mount"></div></div>
+  <div class="plate-frame zoomable"><div id="plate-mount"></div></div>
 <div class="sec-sub" style="margin-top:26px">the Grand Wafq of the Names — the Ninety-Nine and their Owner, one hundred boxes</div>
-<div id="names-wafq-mount" style="margin-top:12px;overflow-x:auto"></div>
+<div id="names-wafq-mount" class="zoomable" style="margin-top:12px;overflow-x:auto"></div>
 </div></section>
  
 <section id="support"><div class="container">
@@ -1824,6 +1836,42 @@ renderForecast();
   } else if(canvas){
     canvas.style.display = 'none';
   }
+})();
+</script>
+
+<script>
+(function(){
+  var backdrop = document.getElementById('lightboxBackdrop');
+  if(!backdrop) return;
+  var current=null, originalParent=null, originalNext=null;
+  function closeZoom(){
+    if(current){
+      current.classList.remove('zoomed');
+      if(originalParent){ originalParent.insertBefore(current, originalNext); }
+      current=null; originalParent=null; originalNext=null;
+    }
+    backdrop.classList.remove('show');
+    document.body.classList.remove('lightbox-open');
+  }
+  document.addEventListener('click', function(e){
+    var z = e.target.closest ? e.target.closest('.zoomable') : null;
+    if(z){
+      if(z.classList.contains('zoomed')){ closeZoom(); }
+      else{
+        if(current) closeZoom();
+        originalParent = z.parentNode;
+        originalNext = z.nextSibling;
+        document.body.appendChild(z);
+        z.classList.add('zoomed');
+        current = z;
+        backdrop.classList.add('show');
+        document.body.classList.add('lightbox-open');
+      }
+      return;
+    }
+    if(e.target === backdrop){ closeZoom(); }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeZoom(); });
 })();
 </script>
 </body>
